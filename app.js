@@ -1,12 +1,12 @@
 const express = require("express");
 
-const mongoose = require("mongoose");
-
 const cors = require("cors");
 
 require("dotenv").config();
 
 const app = express();
+
+const {connectToMongoDb}=require("./handlers/mongoDbHandler")
 
 const default_routes = require("./routes/default_routes")
 
@@ -19,6 +19,8 @@ app.use(cors({
     methods: ["GET","POST", "DELETE","PUT"],
     allowedHeaders: ["Content-Type","Authorization"]
 }))
+
+connectToMongoDb()
 
 app.use(default_routes)
 
