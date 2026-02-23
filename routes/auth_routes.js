@@ -9,5 +9,7 @@ router.post("/loggInn", controller.sign_in_user)
 
 router.get("/verifyJwt/:token", controller.verify_jwt)
 
+router.get("/sendBackUser/:token", controller.sendBackUser)
+
 
 module.exports = router

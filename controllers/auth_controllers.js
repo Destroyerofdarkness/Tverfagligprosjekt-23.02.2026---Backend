@@ -45,7 +45,7 @@ const verify_jwt = async(req,res)=>{
         console.log(err)
         res.status(400).json({success:false})
       }else{
-        console.log(decodedToken);
+        console.log(decodedToken.id);
         res.status(200).json({success:true})
       }
     }
@@ -56,8 +56,29 @@ const verify_jwt = async(req,res)=>{
   }
 }
 
+const sendBackUser = async(req,res)=>{
+  const token = req.params.token
+  try{
+    await jwt.verify(token, process.env.secret, async(err, decodedToken)=>{
+      if(err){
+        console.log(err)
+        res.status(400).json({user:null})
+      }else{
+        console.log(decodedToken.id);
+        const user = await User.findById(decodedToken.id)
+        res.status(200).json({user:user.name})
+      }
+    }
+    )
+  }catch(err){
+    console.log(err);
+    res.status(500).json({user:null})
+  }
+}
+
 module.exports = {
     sign_up_user,
     sign_in_user,
-    verify_jwt
+    verify_jwt,
+    sendBackUser
 }
