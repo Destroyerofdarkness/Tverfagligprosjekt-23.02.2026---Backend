@@ -36,6 +36,18 @@ userSchema.statics.register = async(username, passwd, conPass) => {
   throw Error("Gjentatte passordet er ikke likt..");
 };
 
+userSchema.statics.login = async(name, passwd)=>{
+  const user = await User.findOne({name:name});
+  if(user){
+    const userPass = await argon2.verify(user.passwd, passwd)
+    if(userPass){
+      return user._id
+    }
+    throw Error("Password not correct")
+  }
+  throw Error("User not Found")
+}
+
 const User = model("Users", userSchema);
 
 module.exports = User;

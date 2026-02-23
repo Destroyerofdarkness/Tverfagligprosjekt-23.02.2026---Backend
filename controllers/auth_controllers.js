@@ -24,6 +24,20 @@ const sign_up_user = async (req, res) => {
   }
 };
 
+const sign_in_user = async(req,res)=>{
+  const {user,passwd} = req.body
+  try{
+    const userId = await User.login(user,passwd);
+    const token = signJwt(userId);
+    res.status(201).json({ token });
+  }catch(err){
+    console.log(err);
+    const errors = userErrorHandler(err)
+    res.status(302).json({ errors });
+  }
+}
+
 module.exports = {
-    sign_up_user
+    sign_up_user,
+    sign_in_user
 }

@@ -12,6 +12,16 @@ if(error.message =="Gjentatte passordet er ikke likt.."){
     return errors
 }
 
+if(error.message == "User not Found"){
+    errors.name = "Brukeren finnes ikke.."
+    return errors
+}
+
+if(error.message == "Password not correct"){
+    errors.passwd = "Passordet er feil.."
+    return errors
+}
+
 Object.values(error.errors).forEach(({ properties }) => {
     errors[properties.path] = properties.message;
   });
