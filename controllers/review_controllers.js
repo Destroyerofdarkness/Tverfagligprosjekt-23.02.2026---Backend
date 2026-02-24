@@ -23,7 +23,7 @@ const send_out_reviews = async(req,res)=>{
     }
 }
 
-const get_review_info = async(req,res, next)=>{
+const get_review_info = async(req,res)=>{
     const reviewId = req.params.id
     try {
         const review = await Review.findById(reviewId)
@@ -34,7 +34,6 @@ const get_review_info = async(req,res, next)=>{
     } catch (err) {
         console.log(err);
         res.status(404).json({err})
-        next()
     }
 }
 
