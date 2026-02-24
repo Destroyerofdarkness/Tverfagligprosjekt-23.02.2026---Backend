@@ -24,4 +24,16 @@ const send_review_comments = async(req,res)=>{
     }
 }
 
-module.exports = {publish_comment, send_review_comments}
+const delete_comment = async(req,res)=>{
+    const {commentId} = req.body
+    try {
+        await Comment.findByIdAndDelete(commentId)
+        res.status(200).json({success:true})
+    } catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+}
+
+
+module.exports = {publish_comment, send_review_comments, delete_comment}
