@@ -21,11 +21,25 @@ const reviewSchema = new Schema({
           require_protocol: true
         });
       },
-      message: 'Must be a valid URL'
+      message: 'Lenken må ha en gyldig URL..'
     }
     },
     user:{
         type:String,
         required:true
     }
-})
+});
+
+reviewSchema.statics.publish =async(title,content,link,user)=>{
+ const newReview= new Review({
+    title:title,
+    content:content,
+    link:link,
+    user:user
+  })
+  await newReview.save();
+}
+
+const Review = model("Reviews", reviewSchema)
+
+module.exports = Review

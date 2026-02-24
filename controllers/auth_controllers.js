@@ -37,10 +37,10 @@ const sign_in_user = async(req,res)=>{
   }
 }
 
-const verify_jwt = async(req,res)=>{
+const verify_jwt = (req,res, next)=>{
   const token = req.params.token
   try{
-    await jwt.verify(token, process.env.secret, (err, decodedToken)=>{
+    jwt.verify(token, process.env.secret, (err, decodedToken)=>{
       if(err){
         console.log(err)
         res.status(400).json({success:false})
@@ -53,13 +53,14 @@ const verify_jwt = async(req,res)=>{
   }catch(err){
     console.log(err);
     res.status(500).json({success:false})
+    next()
   }
 }
 
-const sendBackUser = async(req,res)=>{
+const sendBackUser = (req,res,next)=>{
   const token = req.params.token
   try{
-    await jwt.verify(token, process.env.secret, async(err, decodedToken)=>{
+    jwt.verify(token, process.env.secret, async(err, decodedToken)=>{
       if(err){
         console.log(err)
         res.status(400).json({user:null})
@@ -73,6 +74,7 @@ const sendBackUser = async(req,res)=>{
   }catch(err){
     console.log(err);
     res.status(500).json({user:null})
+    next()
   }
 }
 
