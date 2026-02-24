@@ -23,7 +23,20 @@ const send_out_reviews = async(req,res)=>{
     }
 }
 
+const get_review_info = async(req,res, next)=>{
+    const reviewId = req.params.id
+    try {
+        const review = await Review.findById(reviewId)
+        res.status(201).json({review})
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({err})
+        next()
+    }
+}
+
 module.exports = {
   publish_review,
-  send_out_reviews
+  send_out_reviews,
+  get_review_info
 };

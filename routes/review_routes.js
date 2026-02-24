@@ -6,4 +6,6 @@ router.post("/publish", controller.publish_review);
 
 router.get("/sendOutReviews",controller.send_out_reviews);
 
+router.get("/:id",controller.get_review_info)
+
 module.exports = router;
