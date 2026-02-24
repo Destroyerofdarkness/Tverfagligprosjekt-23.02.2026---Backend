@@ -8,4 +8,6 @@ router.get("/sendOutReviews",controller.send_out_reviews);
 
 router.get("/:id",controller.get_review_info)
 
+router.delete("/delete",controller.delete_review)
+
 module.exports = router;

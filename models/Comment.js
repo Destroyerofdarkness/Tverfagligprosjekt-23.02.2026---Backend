@@ -25,6 +25,15 @@ commentSchema.statics.publish = async(content, user, connection)=>{
     return;
 }
 
+commentSchema.statics.deleteAll = async(id)=>{
+    const comments = await Comment.find({connection:id})
+    console.log(comments)
+    comments.forEach(async comment => {
+        await Comment.findByIdAndDelete(comment._id)
+    });
+    return;
+}
+
 const Comment = model("Comments", commentSchema);
 
 module.exports = Comment

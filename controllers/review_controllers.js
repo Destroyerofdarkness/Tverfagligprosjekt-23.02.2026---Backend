@@ -1,4 +1,5 @@
 const Review = require("../models/Review");
+const Comment = require("../models/Comment")
 const { reviewErrorHandler } = require("../handlers/errorHandler");
 
 const publish_review = async (req, res) => {
@@ -37,8 +38,21 @@ const get_review_info = async(req,res)=>{
     }
 }
 
+const delete_review = async(req,res)=>{
+    const {reviewId} = req.body
+    try {
+        await Comment.deleteAll(reviewId)
+        await Review.findByIdAndDelete(reviewId)
+        res.status(200).json({success:true})
+    } catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+}
+
 module.exports = {
   publish_review,
   send_out_reviews,
-  get_review_info
+  get_review_info,
+  delete_review
 };
