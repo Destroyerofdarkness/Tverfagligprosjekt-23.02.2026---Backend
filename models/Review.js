@@ -3,16 +3,17 @@ const validator = require("validator")
 const reviewSchema = new Schema({
     title:{
         type:String,
-        required:true,
+        required:[true, "Skriv inn en tittel.."],
         unique:true
     },
     content:{
         type:String,
-        required:true
+        required:[true,"Skriv inn en beskrivelse"],
+        minLength: [100, "Beskrivelsen må være minst 100 tegn.."]
     },
     link:{
         type:String,
-        required:true,
+        required:[true, "Skriv inn en lenke.."],
         validate: {
       validator: (value) => {
         return validator.isURL(value, {
@@ -26,7 +27,7 @@ const reviewSchema = new Schema({
     },
     user:{
         type:String,
-        required:true
+        required:[true, "User must be provided.."]
     }
 });
 

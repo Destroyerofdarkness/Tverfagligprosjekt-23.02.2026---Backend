@@ -1,5 +1,5 @@
 const Review = require("../models/Review");
-
+const {reviewErrorHandler}= require("../handlers/errorHandler")
 const publish_review = async (req, res) => {
   const { title, content, link, user } = req.body;
   try {
@@ -7,7 +7,8 @@ const publish_review = async (req, res) => {
     res.status(201).json({ success: true });
   } catch (err) {
     console.log("ERRORS:",err.errors);
-    res.status(400).json({ success: false });
+    const errors = reviewErrorHandler(err)
+    res.status(400).json({ errors,success: false });
   }
 };
 

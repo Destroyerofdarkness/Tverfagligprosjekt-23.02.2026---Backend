@@ -25,7 +25,22 @@ if(error.message == "Password not correct"){
 Object.values(error.errors).forEach(({ properties }) => {
     errors[properties.path] = properties.message;
   });
-return errors
+return errors;
 }
 
-module.exports = {userErrorHandler} 
+const reviewErrorHandler = (error)=>{
+
+    const errors = {title: "", content: "", link:"", user:""}
+    if(error.code == 11000){
+    errors.title = "Titlen eksisterer allerede.."
+    return errors
+    }
+
+    Object.values(error.errors).forEach(({ properties }) => {
+    errors[properties.path] = properties.message;
+  });
+return errors;
+}
+
+
+module.exports = {userErrorHandler,reviewErrorHandler} 
