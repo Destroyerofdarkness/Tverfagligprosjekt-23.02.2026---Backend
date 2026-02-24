@@ -1,7 +1,7 @@
 
 const send_message = (req,res)=>{
     try{
-        res.json({message: "Ts sh so ass"})
+        res.json({message: "Hello World! I am the best programmer on Earth!"})
     }catch(err){
         console.log(err)
         res.json({err})
