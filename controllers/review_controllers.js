@@ -27,7 +27,10 @@ const get_review_info = async(req,res, next)=>{
     const reviewId = req.params.id
     try {
         const review = await Review.findById(reviewId)
-        res.status(201).json({review})
+        if(review){
+            res.status(201).json({review})
+        }
+        throw Error("No review found")
     } catch (err) {
         console.log(err);
         res.status(404).json({err})
