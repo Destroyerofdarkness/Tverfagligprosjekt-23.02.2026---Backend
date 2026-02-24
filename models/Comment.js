@@ -15,6 +15,16 @@ const commentSchema = new Schema({
     }
 });
 
+commentSchema.statics.publish = async(content, user, connection)=>{
+    const newComment = new Comment({
+        content:content,
+        user:user,
+        connection:connection
+    });
+    await newComment.save();
+    return;
+}
+
 const Comment = model("Comments", commentSchema);
 
-module.export = Comment
+module.exports = Comment

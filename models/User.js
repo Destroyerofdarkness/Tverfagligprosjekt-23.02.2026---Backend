@@ -26,12 +26,12 @@ userSchema.pre("save", async function() {
 
 userSchema.statics.register = async(username, passwd, conPass) => {
   if (passwd === conPass) {
-    const user = new User({
+    const newUser = new User({
       name: username,
       passwd: passwd,
     });
-    await user.save();
-    return user._id;
+    await newUser.save();
+    return newUser._id;
   }
   throw Error("Gjentatte passordet er ikke likt..");
 };
