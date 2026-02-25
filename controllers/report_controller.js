@@ -22,4 +22,15 @@ const send_out_reports = async (req, res) => {
   }
 };
 
-module.exports = { publish_report, send_out_reports };
+const delete_report = async(req,res)=>{
+    const {reportId} = req.body
+    try{
+        await Report.findByIdAndDelete(reportId)
+        res.status(200).json({success:true})
+    }catch(err){
+        console.log(err);
+        res.status(500)
+    }
+}
+
+module.exports = { publish_report, send_out_reports, delete_report };
