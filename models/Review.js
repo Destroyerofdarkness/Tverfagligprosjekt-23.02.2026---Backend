@@ -28,15 +28,29 @@ const reviewSchema = new Schema({
     user:{
         type:String,
         required:[true, "User must be provided.."]
+    },
+    img:{
+      type:String,
+        required:[true, "Skriv inn bildelenke.."],
+         validate: {
+      validator: (value) => {
+        return validator.isURL(value, {
+          protocols: ['http', 'https', 'ftp'],
+          require_protocol: true
+        });
+      },
+      message: 'Lenken må ha en gyldig URL..'
+    }
     }
 });
 
-reviewSchema.statics.publish =async(title,content,link,user)=>{
+reviewSchema.statics.publish =async(title,content,link,user,img)=>{
  const newReview= new Review({
     title:title,
     content:content,
     link:link,
-    user:user
+    user:user,
+    img:img
   })
   await newReview.save();
 }

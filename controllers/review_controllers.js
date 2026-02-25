@@ -3,9 +3,9 @@ const Comment = require("../models/Comment")
 const { reviewErrorHandler } = require("../handlers/errorHandler");
 
 const publish_review = async (req, res) => {
-  const { title, content, link, user } = req.body;
+  const { title, content, link, user, img } = req.body;
   try {
-    await Review.publish(title, content, link, user);
+    await Review.publish(title, content, link, user , img);
     res.status(201).json({ success: true });
   } catch (err) {
     console.log("ERRORS:", err.errors);

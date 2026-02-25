@@ -30,7 +30,7 @@ return errors;
 
 const reviewErrorHandler = (error)=>{
 
-    const errors = {title: "", content: "", link:"", user:""}
+    const errors = {title: "", content: "", link:"", user:"", img:""}
     if(error.code == 11000){
     errors.title = "Titlen eksisterer allerede.."
     return errors
