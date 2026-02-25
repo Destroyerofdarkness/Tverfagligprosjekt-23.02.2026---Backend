@@ -5,4 +5,6 @@ const controller = require("../controllers/report_controller");
 
 router.post("/publish",controller.publish_report);
 
+router.get("/send_out",controller.send_out_reports);
+
 module.exports = router;

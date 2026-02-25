@@ -12,4 +12,14 @@ const publish_report = async (req, res) => {
   }
 };
 
-module.exports = { publish_report };
+const send_out_reports = async (req, res) => {
+  try {
+    const reports = await Report.find();
+    res.status(201).json({ reports });
+  } catch (err) {
+    res.status(500);
+    console.log(err);
+  }
+};
+
+module.exports = { publish_report, send_out_reports };
