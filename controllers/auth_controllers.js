@@ -67,7 +67,7 @@ const sendBackUser = (req,res,next)=>{
       }else{
         console.log(decodedToken.id);
         const user = await User.findById(decodedToken.id)
-        res.status(200).json({user:user.name})
+        res.status(200).json({user:user})
       }
     }
     )

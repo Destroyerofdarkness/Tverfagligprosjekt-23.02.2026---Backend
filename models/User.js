@@ -13,6 +13,9 @@ const userSchema = new Schema({
     required: [true, "Skriv inn passordet.."],
     minLength: [6,"Passordet må være minst 6 tegn.."],
   },
+  role:{
+    type:String,
+  }
 });
 
 userSchema.pre("save", async function() {
